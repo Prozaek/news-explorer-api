@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 
-// const limiter = require('./middlewares/limiter');
+const limiter = require('./middlewares/limiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { serverDown } = require('./constants/constants');
 
@@ -34,7 +34,7 @@ app.get('/crash-test', () => {
 });
 
 app.use(requestLogger); // ставить в начало цепочки
-// app.use(limiter); // отсекает запросы в определенный интервал времени
+app.use(limiter); // отсекает запросы в определенный интервал времени
 app.use(helmet()); // для установки заголовков безопасности
 
 app.use(bodyParser.json());
